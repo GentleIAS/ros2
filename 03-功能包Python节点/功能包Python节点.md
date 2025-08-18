@@ -25,14 +25,14 @@ python_package/
 │   └── __init__.py
 ├── resource/                # 资源文件
 │   └── python_package
-└── test/                    # 测试文件
+├──  test/                    # 测试文件
 │   ├── test_copyright.py
 │   ├── test_flake8.py
 │   └── test_pep257.py
 ├── LICENSE                  # 许可证文件
 ├── package.xml              # 功能包描述文件
 ├── setup.cfg                # 安装配置
-├── setup.py                 # Python安装配置
+└──setup.py                 # Python安装配置
 ```
 在`python_package`文件夹下新建文件（eg:`python_node.py`）并编写
 
