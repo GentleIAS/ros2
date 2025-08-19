@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ros2_python_node = python_package.python_node:main'
+            'ros2_python_node = python_package.python_node:main',
             #"ros2_python_node"    创建后的可执行文件名字
             #"python_package.python_node:main"    包名.文件名:函数名
         ],
