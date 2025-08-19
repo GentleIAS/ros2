@@ -21,18 +21,18 @@ ros2 pkg create --build-type ament_python --license Apache-2.0 python_package
 创建后的文件目录
 ```bash
 python_package/
-├── python_package/          # Python模块目录
+├── python_package/           # Python模块目录
 │   └── __init__.py
-├── resource/                # 资源文件
+├── resource/                 # 资源文件
 │   └── python_package
 ├──  test/                    # 测试文件
 │   ├── test_copyright.py
 │   ├── test_flake8.py
 │   └── test_pep257.py
-├── LICENSE                  # 许可证文件
-├── package.xml              # 功能包描述文件
-├── setup.cfg                # 安装配置
-└──setup.py                 # Python安装配置
+├── LICENSE                   # 许可证文件
+├── package.xml               # 功能包描述文件
+├── setup.cfg                 # 安装配置
+└──setup.py                   # Python安装配置
 ```
 在`python_package`文件夹下新建文件（eg:`python_node.py`）并编写
 
@@ -91,11 +91,11 @@ entry_points={
         'console_scripts': [
             'ros2_python_node = python_package.python_node:main'
             #"ros2_python_node"    创建后的可执行文件名字
-            #"python_package.python_node:main"    包名.文件名:函数名
+            #"python_package.python_node:main",    包名.文件名:函数名
         ],
     },
 ```
-在`package.xml`中添加运行依赖`<depend>rclpy<depend>`
+在`package.xml`中添加运行依赖`<depend>rclpy</depend>`
 ## 构建功能包
 
 ```bash
@@ -128,8 +128,9 @@ source install/setup.bash
 ```bash
 ros2 run python_package ros2_python_node
 ```
-## 遇到的未解决的问题，请指教！！！
-我使用`source install/setup.bash`后运行`ros2 run python_package ros2_python_node`会报错，看了看ros环境变量没加载（我是在wsl2-Ubuntu2204中，sh脚本我也试了）
+## ~~遇到的未解决的问题，请指教！！！~~ 
+~~我使用`source install/setup.bash`后运行`ros2 run python_package ros2_python_node`会报错，看了看ros环境变量没加载（我是在wsl2-Ubuntu2204中，sh脚本我也试了）~~ 
 ![遇到的问题](https://i-blog.csdnimg.cn/direct/83ce61034ac541a4a8c30de534d0cb8d.png)
-最后手动加载的环境变量
+~~最后手动加载的环境变量~~ 
 ![手动加载环境变量](https://i-blog.csdnimg.cn/direct/fa91a449f5f84bfc8881cdf4c0c5a8f2.png)
+最后在社区找到原因是在`package.xml`中添加运行依赖时`<depend>rclpy</depend>`少了个`/`
