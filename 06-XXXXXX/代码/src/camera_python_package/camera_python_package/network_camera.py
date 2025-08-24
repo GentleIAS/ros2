@@ -17,12 +17,12 @@ class NetworkCamera(Node):
         #CvBridge对象，转换ROS图像消息和OpenCV图像
         self.bridge = CvBridge()
         #设置视频保存路径
-        self.save_dir = os.path.expanduser('/home/mepus/network_camera')
+        self.save_dir = os.path.expanduser('~/network_camera')
         #如果路径不存在则创建
         os.makedirs(self.save_dir, exist_ok=True)
         
         #RTSP摄像头地址配置
-        self.rtsp_url = 'rtsp://admin:js12345@192.168.1.254:554/live'   #网络摄像头RTSP地址
+        self.rtsp_url = 'rtsp://xxxxx'     #网络摄像头RTSP地址
         self.cap = None                    #OpenCV视频捕获对象
         self.capture_thread = None         #图像捕获线程
         self.capture_flag = False          #捕获线程运行标志
