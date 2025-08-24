@@ -67,7 +67,7 @@ class NetworkCamera(Node):
             success = False
             decode_method = "未知"
             
-            #方法1: 使用GStreamer管道进行GPU硬件解码
+            #使用GStreamer管道进行GPU硬件解码
             if not success:
                 try:
                     gst_pipeline = f"rtspsrc location={self.rtsp_url} latency=0 ! rtph264depay ! h264parse ! nvv4l2decoder ! nvvidconv ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw,format=BGR ! appsink drop=1 max-buffers=1"
@@ -78,36 +78,6 @@ class NetworkCamera(Node):
                 except Exception as e:
                     self.get_logger().warn(f'GStreamer初始化失败: {str(e)}')
             
-            #方法2: 使用FFMPEG CUDA硬件加速
-            if not success:
-                try:
-                    self.cap = cv2.VideoCapture(self.rtsp_url, cv2.CAP_FFMPEG)
-                    if self.cap.isOpened():
-                        # 尝试启用CUDA硬件加速
-                        self.cap.set(cv2.CAP_PROP_HW_ACCELERATION, cv2.VIDEO_ACCELERATION_ANY)
-                        hw_accel = self.cap.get(cv2.CAP_PROP_HW_ACCELERATION)
-                        if hw_accel > 0:
-                            decode_method = "FFMPEG CUDA硬件加速"
-                        else:
-                            decode_method = "FFMPEG软件解码"
-                        success = True
-                except Exception as e:
-                    self.get_logger().warn(f'FFMPEG初始化失败: {str(e)}')
-            
-            #方法3: 回退到CPU软件解码
-            if not success:
-                try:
-                    self.cap = cv2.VideoCapture(self.rtsp_url)
-                    if self.cap.isOpened():
-                        decode_method = "CPU软件解码"
-                        success = True
-                except Exception as e:
-                    self.get_logger().error(f'CPU软件解码初始化失败: {str(e)}')
-
-            if not success or not self.cap.isOpened():
-                self.get_logger().error('无法连接到网络摄像头，所有解码方法均失败')
-                return False
-                
             #获取摄像头参数
             fps = self.cap.get(cv2.CAP_PROP_FPS)
             width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))

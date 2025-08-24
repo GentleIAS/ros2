@@ -317,3 +317,52 @@ cv2.imshow(window_name, image)
 2.cv2.destroyAllWindows() ：关闭所有OpenCV创建的窗口
 3.cv2.destroyWindow(window_name) ：关闭指定名称的窗口
 ```
+#### GStreamer管道
+```python
+gst_pipeline = f"rtspsrc location={self.rtsp_url} latency=0 ! rtph264depay ! h264parse ! nvv4l2decoder ! nvvidconv ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw,format=BGR ! appsink drop=1 max-buffers=1"
+
+1. rtspsrc location={self.rtsp_url} latency=0
+功能：RTSP视频源组件
+location：指定RTSP流的URL地址（如 rtsp://192.168.1.100:554/stream）
+latency=0：设置最低延迟模式，适合实时应用
+作用：从网络摄像头获取RTSP视频流
+2. rtph264depay
+功能：RTP H.264解包器
+作用：将通过RTP协议传输的H.264数据包解包，提取出纯H.264视频数据
+必要性：RTSP流通常使用RTP协议封装，需要先解包
+3. h264parse
+功能：H.264解析器
+作用：分析H.264视频流的结构，识别帧边界、参数集等信息
+重要性：为后续硬件解码器提供正确的数据格式
+4. nvv4l2decoder ⭐
+功能：NVIDIA硬件解码器（核心组件）
+作用：使用NVIDIA GPU的专用解码单元进行H.264硬件解码
+优势：比CPU软件解码快数倍，占用CPU资源极少
+要求：需要NVIDIA显卡和正确的驱动
+5. nvvidconv
+功能：NVIDIA视频转换器
+作用：在GPU内存中进行颜色空间转换和缩放操作
+效率：直接在GPU上处理，避免GPU-CPU数据传输
+6. video/x-raw,format=BGRx
+功能：指定输出格式为BGRx
+BGRx格式：每个像素4字节（蓝、绿、红、填充），适合GPU处理
+作用：为下一步转换做准备
+7. videoconvert
+功能：通用视频格式转换器
+作用：将BGRx格式转换为标准BGR格式
+兼容性：确保与OpenCV兼容
+8. video/x-raw,format=BGR
+功能：指定最终输出格式为BGR
+BGR格式：OpenCV的标准格式（蓝、绿、红，每像素3字节）
+重要性：直接兼容OpenCV的Mat对象
+9. appsink drop=1 max-buffers=1
+功能：应用程序接收器
+drop=1：当缓冲区满时丢弃旧帧，保持实时性
+max-buffers=1：最大缓冲1帧，最小化延迟
+作用：将处理后的视频帧输出给应用程序（OpenCV）
+
+self.cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+cv2.CAP_GSTREAMER：指定使用GStreamer后端
+优势：OpenCV直接接收BGR格式的解码帧
+兼容性：与OpenCV的图像处理函数完全兼容
+```
