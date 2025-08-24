@@ -1,0 +1,5 @@
+  File "/home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package/usb_camera.py", line 83
+    height, width, —_ = first_frame.shape   #获取图像尺寸
+                   ^
+SyntaxError: invalid character '—' (U+2014)
+

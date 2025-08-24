@@ -1,0 +1,3 @@
+[console_scripts]
+network_camera = camera_python_package.network_camera:main
+

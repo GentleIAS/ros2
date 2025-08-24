@@ -1,0 +1,40 @@
+running egg_info
+creating ../../build/camera_python_package/camera_python_package.egg-info
+writing ../../build/camera_python_package/camera_python_package.egg-info/PKG-INFO
+writing dependency_links to ../../build/camera_python_package/camera_python_package.egg-info/dependency_links.txt
+writing entry points to ../../build/camera_python_package/camera_python_package.egg-info/entry_points.txt
+writing requirements to ../../build/camera_python_package/camera_python_package.egg-info/requires.txt
+writing top-level names to ../../build/camera_python_package/camera_python_package.egg-info/top_level.txt
+writing manifest file '../../build/camera_python_package/camera_python_package.egg-info/SOURCES.txt'
+reading manifest file '../../build/camera_python_package/camera_python_package.egg-info/SOURCES.txt'
+writing manifest file '../../build/camera_python_package/camera_python_package.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/mepus/ros2_ws/build/camera_python_package/build
+creating /home/mepus/ros2_ws/build/camera_python_package/build/lib
+creating /home/mepus/ros2_ws/build/camera_python_package/build/lib/camera_python_package
+copying camera_python_package/usb_camera.py -> /home/mepus/ros2_ws/build/camera_python_package/build/lib/camera_python_package
+copying camera_python_package/__init__.py -> /home/mepus/ros2_ws/build/camera_python_package/build/lib/camera_python_package
+running install
+running install_lib
+creating /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package
+copying /home/mepus/ros2_ws/build/camera_python_package/build/lib/camera_python_package/usb_camera.py -> /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package
+copying /home/mepus/ros2_ws/build/camera_python_package/build/lib/camera_python_package/__init__.py -> /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package
+byte-compiling /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package/usb_camera.py to usb_camera.cpython-310.pyc
+  File "/home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package/usb_camera.py", line 83
+    height, width, —_ = first_frame.shape   #获取图像尺寸
+                   ^
+SyntaxError: invalid character '—' (U+2014)
+
+byte-compiling /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/mepus/ros2_ws/install/camera_python_package/share/ament_index
+creating /home/mepus/ros2_ws/install/camera_python_package/share/ament_index/resource_index
+creating /home/mepus/ros2_ws/install/camera_python_package/share/ament_index/resource_index/packages
+copying resource/camera_python_package -> /home/mepus/ros2_ws/install/camera_python_package/share/ament_index/resource_index/packages
+copying package.xml -> /home/mepus/ros2_ws/install/camera_python_package/share/camera_python_package
+running install_egg_info
+Copying ../../build/camera_python_package/camera_python_package.egg-info to /home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package-0.0.0-py3.10.egg-info
+running install_scripts
+Installing usb_camera script to /home/mepus/ros2_ws/install/camera_python_package/lib/camera_python_package
+writing list of installed files to '/home/mepus/ros2_ws/build/camera_python_package/install.log'

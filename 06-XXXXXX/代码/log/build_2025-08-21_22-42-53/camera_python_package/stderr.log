@@ -1,0 +1,5 @@
+  File "/home/mepus/ros2_ws/install/camera_python_package/lib/python3.10/site-packages/camera_python_package/usb_camera.py", line 12
+    class UsbCamera(Node)
+                         ^
+SyntaxError: expected ':'
+
